@@ -1,10 +1,23 @@
 import { create } from "zustand";
 
-export const useUserStore = create((set) => ({
+interface UserInfo {
+  name: string;
+  role: string;
+}
+
+interface UserState {
+  userInfo: UserInfo;
+  count: number;
+  increaseCount: () => void;
+  updateName: (newName: string) => void;
+}
+
+export const useUserStore = create<UserState>((set) => ({
   userInfo: { name: "Gamer", role: "Admin" },
   count: 0,
-  // 修改状态的 Action
   increaseCount: () => set((state) => ({ count: state.count + 1 })),
   updateName: (newName) =>
-    set((state) => ({ userInfo: { ...state.userInfo, name: newName } })),
+    set((state) => {
+      return { userInfo: { ...state.userInfo, name: newName } };
+    }),
 }));

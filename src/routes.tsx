@@ -1,32 +1,15 @@
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Link,
-  Outlet,
-} from "react-router";
+import { createBrowserRouter, RouterProvider } from "react-router";
+import MainLayout from "./components/MainLayout";
 import HomeView from "./pages/home";
-
-// 简单的布局组件
-const Layout = () => (
-  <div style={{ padding: 20 }}>
-    <nav style={{ display: "flex", gap: 15, marginBottom: 20 }}>
-      <Link to="/">首页</Link>
-      <Link to="/about">关于我们</Link>
-    </nav>
-    <hr />
-    <main style={{ marginTop: 20 }}>
-      <Outlet />
-    </main>
-  </div>
-);
+import AboutView from "./pages/about";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: <MainLayout />,
     children: [
-      { path: "/", element: <HomeView /> },
-      { path: "/about", element: <div>这是关于页面内容</div> },
+      { index: true, element: <HomeView /> },
+      { path: "about", element: <AboutView /> },
     ],
   },
 ]);
